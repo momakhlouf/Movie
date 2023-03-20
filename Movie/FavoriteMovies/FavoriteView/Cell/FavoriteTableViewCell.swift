@@ -8,7 +8,7 @@
 import UIKit
 import Kingfisher
 
-class MovieTableViewCell: UITableViewCell {
+class FavoriteTableViewCell: UITableViewCell {
 
     @IBOutlet weak var backView: UIView!
     @IBOutlet weak var movieTitle: UILabel!
@@ -22,7 +22,7 @@ class MovieTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-       
+      
         backView.round()
         backView.addBorder(color: .label, width: 1)
         MovieImage.round(5)
@@ -39,11 +39,18 @@ class MovieTableViewCell: UITableViewCell {
         print(movie.title)
         rate.text = "⭐️\(String(format: "%.1f", movie.voteAverage ?? 0))/10"
         date.text = movie.releaseDate ?? movie.firstAirDate ?? ""
-        MovieImage.kf.setImage(with: URL(string: "https://image.tmdb.org/t/p/w400/\(movie.posterPath)") )
+        MovieImage.kf.setImage(with: URL(string: "https://image.tmdb.org/t/p/w400/\(movie.posterPath)"))
+    }
+    func configureFavoriteCell(movie : FavoriteMovie){
+        MovieImage.kf.setImage(with: URL(string: movie.photo ?? ""))
+        movieTitle.text = movie.title
+        date.text = movie.date
+        rate.text = "⭐️\(String(format: "%.1f", movie.rate))/10"
     }
     
     
     @IBAction func favoriteButtonPressed(_ sender: UIButton) {
         didTapFav?()
+        
     }
 }

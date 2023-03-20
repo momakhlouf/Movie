@@ -24,9 +24,10 @@ class UpcomingMoviesViewController: UIViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+   
     override func viewDidLoad() {
         super.viewDidLoad()
+        viewModel.viewDidLoad()
         setUpViewModelBindings()
         setupTableView()
         setupUI()
@@ -51,7 +52,8 @@ private extension UpcomingMoviesViewController {
     func setUpViewModelBindings(){
         viewModel.$upcomingMovies
             .receive(on: DispatchQueue.main)
-            .sink{ [weak self] _ in self?.tableView.reloadData()
+            .sink{ [weak self] _ in
+                self?.tableView.reloadData()
                 self?.createSnapShot()
             }
             .store(in: &cancellables)
@@ -73,7 +75,7 @@ private extension UpcomingMoviesViewController {
         viewModel.errorPublisher
             .receive(on: DispatchQueue.main)
             .sink { [weak self] error in
-                self?.showAlert(title: "Error", message: error.localizedDescription)
+                self?.showAlert(title: "No Movies", message: "Sorry, there are no movies to display at the moment. Please try again later or check back soon.")
             }
             .store(in: &cancellables)
     }
@@ -88,7 +90,7 @@ private extension UpcomingMoviesViewController {
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! UpcomingMovieTableViewCell
             cell.selectionStyle = .none
 
-            cell.configureCell(movie: self.viewModel.moviesContent()[indexPath.row])
+            cell.configureUpcomingCell(movie: self.viewModel.moviesContent()[indexPath.row])
             return cell
         })
     }
@@ -108,6 +110,18 @@ extension UpcomingMoviesViewController : UITableViewDelegate  {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
       print("selected")
     }
+    
+    
+    
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        let offsetY = scrollView.contentOffset.y
+        let contentHeight = scrollView.contentSize.height
+        let frameHeight = scrollView.frame.height
+        if offsetY > contentHeight - frameHeight{
+//            !viewModel.isSearching &&
+            viewModel.getUpcomingMovies()
+        }
+    }
 }
 
 //MARK: SECTION FOR DIFFABLE DATA SOURCE
@@ -116,3 +130,5 @@ extension UpcomingMoviesViewController {
         case main
     }
 }
+
+

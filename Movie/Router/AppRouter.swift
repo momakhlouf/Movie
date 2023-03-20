@@ -9,8 +9,6 @@ import UIKit
 
 class AppRouter {
     
-    
-    
     static var service : ServiceProtocol {
         return Service()
     }
@@ -26,15 +24,29 @@ class AppRouter {
     static func createUpcomingMovieScene() -> UIViewController{
         let vc = UpcomingMoviesViewController(service: service)
         vc.title = "Upcoming"
-        vc.tabBarItem = UITabBarItem(title: "Upcoming", image: UIImage(systemName: "heart.fill"), tag: 1)
+        vc.tabBarItem = UITabBarItem(title: "Upcoming", image: UIImage(systemName: "gear"), tag: 1)
 
         return vc
     }
+    
+    static func createFavoriteMovieScene() -> UIViewController{
+        let viewModel =  FavoriteMoviesViewModel()
+        let vc =  FavoriteViewController(viewModel: viewModel)
+        vc.title = "Favorite"
+        vc.tabBarItem = UITabBarItem(title: "Favorite", image: UIImage(systemName: "heart.fill"), tag: 1)
+
+        return vc
+    }
+    
+    
     
     static func createTrendingDetails(movie : TrendingMovie) -> UIViewController{
         let viewModel = TrendingDetailsViewModel(movie: movie)
         return TrendingMoviesDetailsViewController(viewModel: viewModel)
     }
+    
+    
+    
     
     static func createTabBarController()-> UITabBarController {
         
@@ -46,8 +58,11 @@ class AppRouter {
 
         let upcomingViewController = createUpcomingMovieScene()
         let upcomingNavigationController = UINavigationController(rootViewController: upcomingViewController)
+        
+        let favoriteViewController = createFavoriteMovieScene()
+        let favoriteNavigationController = UINavigationController(rootViewController: favoriteViewController)
 
-        tabBarController.viewControllers = [trendingNavigationController,upcomingNavigationController]
+        tabBarController.viewControllers = [trendingNavigationController,upcomingNavigationController,favoriteNavigationController]
         return tabBarController
     }
     

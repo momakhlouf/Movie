@@ -6,7 +6,7 @@
 //
 
 import UIKit
-import Kingfisher
+
 class UpcomingMovieTableViewCell: UITableViewCell {
 
     @IBOutlet weak var backView: UIView!
@@ -15,6 +15,9 @@ class UpcomingMovieTableViewCell: UITableViewCell {
     
     @IBOutlet weak var rateLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
+    
+    var didTapFav: (()->())?
+
     override func awakeFromNib() {
         super.awakeFromNib()
 
@@ -29,18 +32,46 @@ class UpcomingMovieTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func configureCell(movie : UpcomingMovie){
+    func configureUpcomingCell(movie : UpcomingMovie){
         titleLabel.text = movie.title
         dateLabel.text = movie.releaseDate
-       // rateLabel.text = "⭐️\(String(format: "%.1f", movie.voteAverage))/10"
-        
-       // movieImage.kf.setImage(with: URL(string: "https://image.tmdb.org/t/p/w400\(movie.posterPath)"))
+        rateLabel.text = "⭐️\(String(format: "%.1f", movie.voteAverage ?? 0))/10"
         if let poster = movie.posterURL {
-            movieImage.kf.setImage(with: URL(string: poster))
-        }else{
-            movieImage.image = UIImage(systemName: "heart.fill")
+            movieImage.loadImage(poster)
         }
      
     }
     
+    func configureTrendingCell(movie : TrendingMovie){
+        titleLabel.text = movie.name ??  movie.title ?? "No Name"
+        dateLabel.text = movie.releaseDate ?? movie.firstAirDate ?? ""
+        rateLabel.text = "⭐️\(String(format: "%.1f", movie.voteAverage ?? 0))/10"
+
+        if let poster = movie.posterURL {
+            movieImage.loadImage(poster)
+        }
+        
+    }
+    
+    
+    func configureFavoriteCell(movie : FavoriteMovie){
+        titleLabel.text = movie.title
+        dateLabel.text = movie.date
+        rateLabel.text = "⭐️\(String(format: "%.1f", movie.rate))/10"
+    }
+    
+    
+    @IBAction func addFavoriteButtonPressed(_ sender: UIButton) {
+        didTapFav?()
+    }
+    
+//    MovieImage.kf.setImage(with: URL(string: "https://image.tmdb.org/t/p/w400/\(movie.posterPath)"))
+    
+    
+//    didTapFav?()
+
 }
+
+
+
+

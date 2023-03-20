@@ -174,9 +174,9 @@
             filePath = "Movie/TrendingMovies/ViewModel/TrendingViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "80"
-            endingLineNumber = "80"
-            landmarkName = "loadMoreDta()"
+            startingLineNumber = "89"
+            endingLineNumber = "89"
+            landmarkName = "loadMoreData()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

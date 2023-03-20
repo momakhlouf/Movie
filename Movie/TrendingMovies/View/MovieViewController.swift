@@ -15,6 +15,7 @@ class MovieViewController: UIViewController {
     @IBOutlet weak var indicator: UIActivityIndicatorView!
     
     private let viewModel : TrendingViewModel
+    private let favoriteViewModel = FavoriteMoviesViewModel()
     var cancellable = Set<AnyCancellable>()
     let searchController = UISearchController(searchResultsController: nil)
 
@@ -48,7 +49,7 @@ extension MovieViewController {
     func setupTableView(){
         self.tableView.dataSource = self
         self.tableView.delegate = self
-        self.tableView.register(UINib(nibName: "MovieTableViewCell", bundle: nil), forCellReuseIdentifier: "cell")
+        self.tableView.register(UINib(nibName: "UpcomingMovieTableViewCell", bundle: nil), forCellReuseIdentifier: "cell")
         
     }
 }
@@ -132,13 +133,15 @@ extension MovieViewController : UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! MovieTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! UpcomingMovieTableViewCell  //MovieTableViewCell
         //cell.selectionStyle = .none
+        let movie = viewModel.movieContent()[indexPath.row]
+    
         cell.didTapFav = { [weak self] in
-         // fav button
+            self?.viewModel.addToFavorites(indexPath: indexPath)
         }
          cell.selectionStyle = .none
-         cell.configureCell(movie: viewModel.movieContent()[indexPath.row])
+        cell.configureTrendingCell(movie: viewModel.movieContent()[indexPath.row])
                  
         return cell
     }
@@ -162,3 +165,6 @@ extension MovieViewController : UITableViewDelegate, UITableViewDataSource {
     }
 
 }
+
+
+

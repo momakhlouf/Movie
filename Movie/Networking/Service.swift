@@ -10,7 +10,7 @@ import Combine
 
 protocol ServiceProtocol {
     func getTrendingMovies(page : Int)-> AnyPublisher<TrendingModel,Error>
-    func getUpcomingMovies(page : Int)-> AnyPublisher<[UpcomingMovie],Error>
+    func getUpcomingMovies(page : Int)-> AnyPublisher<UpcomingModel,Error>
 }
 
 class Service : ServiceProtocol{
@@ -34,7 +34,7 @@ class Service : ServiceProtocol{
     
     
     //MARK: GET UPCOMING MOVIES
-    func getUpcomingMovies(page : Int) -> AnyPublisher<[UpcomingMovie] , Error> {
+    func getUpcomingMovies(page : Int) -> AnyPublisher<UpcomingModel , Error> {
         let urlString = constant.serverAddress + constant.upcoming + constant.apiKey + "&page=" + "\(page)"
         print(urlString)
         guard let url = URL(string: urlString) else {
@@ -44,7 +44,6 @@ class Service : ServiceProtocol{
             .subscribe(on: DispatchQueue.global())
             .map{$0.data}
             .decode(type: UpcomingModel.self, decoder: JSONDecoder())
-            .map{$0.results}
             .eraseToAnyPublisher()
     }
 }
