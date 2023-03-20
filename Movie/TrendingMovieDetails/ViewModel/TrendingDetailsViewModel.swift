@@ -9,7 +9,6 @@ import Foundation
 
 class TrendingDetailsViewModel{
     
-    
    var movie : TrendingMovie
     var movieImage : String
     var movieTitle : String
@@ -18,12 +17,9 @@ class TrendingDetailsViewModel{
     
     init(movie: TrendingMovie) {
         self.movie = movie
-        
         self.movieID = movie.id ?? 1
         self.movieTitle = movie.title ?? movie.name ?? ""
-        self.movieImage = movie.posterPath
+        self.movieImage = movie.posterURL ?? ""
         self.movieOverView = movie.overview
-        
-        
     }
 }

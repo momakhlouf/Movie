@@ -28,15 +28,13 @@ class TrendingMoviesDetailsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setupView()
-
     }
     
     func setupView(){
         titleLabel.text = viewModel.movieTitle
         descriptionLabel.text = viewModel.movieOverView
-        imageView.kf.setImage(with: URL(string: "https://image.tmdb.org/t/p/w400/\(viewModel.movieImage)"))
+        imageView.loadImage(viewModel.movieImage)
       
     }
 

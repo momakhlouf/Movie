@@ -90,6 +90,10 @@ private extension UpcomingMoviesViewController {
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! UpcomingMovieTableViewCell
             cell.selectionStyle = .none
 
+            cell.didTapFav = { [weak self] in
+                self?.viewModel.addToFavorites(indexPath: indexPath)
+            }
+            
             cell.configureUpcomingCell(movie: self.viewModel.moviesContent()[indexPath.row])
             return cell
         })
@@ -108,7 +112,9 @@ private extension UpcomingMoviesViewController {
 extension UpcomingMoviesViewController : UITableViewDelegate  {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-      print("selected")
+        let movie = viewModel.moviesContent()[indexPath.row]
+        let detailsVC = AppRouter.createUpcomingDetails(movie: movie)
+        navigationController?.pushViewController(detailsVC, animated: true)
     }
     
     

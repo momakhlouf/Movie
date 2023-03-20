@@ -17,15 +17,15 @@ class AppRouter {
         let vc = MovieViewController(service: service)
         vc.title = "Trending"
         vc.tabBarItem = UITabBarItem(title: "Trending", image: UIImage(systemName: "flame.fill"), tag: 0)
-
+        
         return vc
     }
     
     static func createUpcomingMovieScene() -> UIViewController{
         let vc = UpcomingMoviesViewController(service: service)
         vc.title = "Upcoming"
-        vc.tabBarItem = UITabBarItem(title: "Upcoming", image: UIImage(systemName: "gear"), tag: 1)
-
+        vc.tabBarItem = UITabBarItem(title: "Upcoming", image: UIImage(systemName: "popcorn.fill"), tag: 1)
+        
         return vc
     }
     
@@ -34,7 +34,7 @@ class AppRouter {
         let vc =  FavoriteViewController(viewModel: viewModel)
         vc.title = "Favorite"
         vc.tabBarItem = UITabBarItem(title: "Favorite", image: UIImage(systemName: "heart.fill"), tag: 1)
-
+        
         return vc
     }
     
@@ -45,9 +45,15 @@ class AppRouter {
         return TrendingMoviesDetailsViewController(viewModel: viewModel)
     }
     
+    static func createUpcomingDetails(movie : UpcomingMovie)-> UIViewController{
+        let viewModel = UpcomingDetailsViewModel(movie: movie)
+        return UpcomingDetailsViewController(viewModel: viewModel)
+
+    }
     
     
     
+    //MARK: TABBAR
     static func createTabBarController()-> UITabBarController {
         
         let tabBarController = UITabBarController()
@@ -66,36 +72,6 @@ class AppRouter {
         return tabBarController
     }
     
- 
-    
-    
-    
-    
 }
 
-
-
-//    func start(){
-//
-//        let trendingVC = MovieViewController(service: network)
-//        let nav = UINavigationController(rootViewController: trendingVC)
-//        nav.tabBarItem = UITabBarItem(title: "Now Playing", image: UIImage(systemName: "film"), tag: 0)
-//
-//        let upcomingVC =  UpcomingMoviesViewController(service: network)
-//        let nav1 = UINavigationController(rootViewController: upcomingVC)
-//        nav1.tabBarItem = UITabBarItem(title: "Now Playing", image: UIImage(systemName: "film"), tag: 1)
-//
-//
-//        let tabbar = UITabBarController()
-//        tabbar.viewControllers = [trendingVC , upcomingVC]
-//
-//        window.rootViewController = tabbar
-//    }
-//
-    
-    
-   
-    
-    // let upcoming  = UpcomingMoviesViewController(viewModel: )
-    
 

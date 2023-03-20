@@ -13,7 +13,6 @@ class ServiceConstant{
     
     private init(){}
     
-    
     public var apiKey: String {
         get{
             return "15fe946886608e9b2315244355fb5b94"
@@ -36,8 +35,6 @@ class ServiceConstant{
         get{
             return "movie/upcoming?api_key="
           }
-       }
-    
-//    var upcoming = "movie/upcoming?api_key="
+       }    
 }
 

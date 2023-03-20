@@ -41,6 +41,7 @@
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
                 <constraint firstItem="odf-he-yct" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="8" id="6Z4-eJ-NtF"/>
+                <constraint firstItem="8IC-Ij-Bze" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="8" id="HUa-x3-aea"/>
                 <constraint firstItem="8IC-Ij-Bze" firstAttribute="top" secondItem="odf-he-yct" secondAttribute="bottom" constant="16" id="SmN-M2-Yeg"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="ubp-Jm-ufw" secondAttribute="trailing" constant="8" id="Syo-pZ-a11"/>
                 <constraint firstItem="8IC-Ij-Bze" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="8" id="TdM-zm-4Wk"/>
@@ -50,6 +51,8 @@
                 <constraint firstItem="odf-he-yct" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="gxQ-zX-jHs"/>
                 <constraint firstItem="ubp-Jm-ufw" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="8" id="ifC-hD-H51"/>
                 <constraint firstItem="odf-he-yct" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.25" id="ngC-dp-2rb"/>
+                <constraint firstItem="8IC-Ij-Bze" firstAttribute="top" secondItem="odf-he-yct" secondAttribute="bottom" constant="8" id="ptE-CY-maJ"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="8IC-Ij-Bze" secondAttribute="trailing" constant="8" id="xby-0C-a2q"/>
             </constraints>
             <point key="canvasLocation" x="70.992366412213741" y="19.718309859154932"/>
         </view>

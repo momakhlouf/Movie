@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import Kingfisher
 
 class FavoriteTableViewCell: UITableViewCell {
 
@@ -17,9 +16,7 @@ class FavoriteTableViewCell: UITableViewCell {
     @IBOutlet weak var rate: UILabel!
     @IBOutlet weak var date: UILabel!
     
-    var didTapFav: (()->())?
-
-    
+ 
     override func awakeFromNib() {
         super.awakeFromNib()
       
@@ -34,23 +31,11 @@ class FavoriteTableViewCell: UITableViewCell {
 
     }
     
-    func configureCell(movie : TrendingMovie){
-        movieTitle.text = movie.name ??  movie.title ?? ""
-        print(movie.title)
-        rate.text = "⭐️\(String(format: "%.1f", movie.voteAverage ?? 0))/10"
-        date.text = movie.releaseDate ?? movie.firstAirDate ?? ""
-        MovieImage.kf.setImage(with: URL(string: "https://image.tmdb.org/t/p/w400/\(movie.posterPath)"))
-    }
     func configureFavoriteCell(movie : FavoriteMovie){
-        MovieImage.kf.setImage(with: URL(string: movie.photo ?? ""))
+        MovieImage.loadImage(movie.photo)
+       // MovieImage.kf.setImage(with: URL(string: movie.photo ?? ""))
         movieTitle.text = movie.title
         date.text = movie.date
         rate.text = "⭐️\(String(format: "%.1f", movie.rate))/10"
-    }
-    
-    
-    @IBAction func favoriteButtonPressed(_ sender: UIButton) {
-        didTapFav?()
-        
     }
 }

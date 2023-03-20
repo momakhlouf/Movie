@@ -17,7 +17,7 @@ class UpcomingMoviesViewModel {
     @Published var isLoading : Bool = false
     @Published var isSearching: Bool = false
 
-    
+    let favoriteViewModel = FavoriteMoviesViewModel()
     private var cancellables = Set<AnyCancellable>()
     private var currentPage = 1
     private var totalPages : Int = 1
@@ -73,5 +73,14 @@ class UpcomingMoviesViewModel {
                     self?.totalPages = totalPages
                 }
                 .store(in: &cancellables)
+    }
+    
+    
+    //MARK: ADD TO FAVORITES
+    func addToFavorites(indexPath : IndexPath){
+        let movie = moviesContent()[indexPath.row]
+
+        favoriteViewModel.addFavorite(date: movie.releaseDate , id: Int64(movie.id ?? 0), overView: movie.overview ?? "", photo: movie.posterURL ?? "", rate: movie.voteAverage ?? 0, title: movie.title )
+        print("pressed")
     }
 }

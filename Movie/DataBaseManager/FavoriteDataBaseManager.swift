@@ -24,7 +24,6 @@ class FavoriteDataBaseManager {
         context = container.viewContext
     }
     
-    
     func saveData(){
         do{
             try context.save()

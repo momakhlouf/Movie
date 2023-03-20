@@ -30,9 +30,7 @@ class Service : ServiceProtocol{
                 .decode(type: TrendingModel.self, decoder: JSONDecoder())
                 .eraseToAnyPublisher()
     }
-    
-    
-    
+
     //MARK: GET UPCOMING MOVIES
     func getUpcomingMovies(page : Int) -> AnyPublisher<UpcomingModel , Error> {
         let urlString = constant.serverAddress + constant.upcoming + constant.apiKey + "&page=" + "\(page)"
@@ -47,8 +45,6 @@ class Service : ServiceProtocol{
             .eraseToAnyPublisher()
     }
 }
-
-
 
 enum NetworkError: Error {
     case invalidURL
